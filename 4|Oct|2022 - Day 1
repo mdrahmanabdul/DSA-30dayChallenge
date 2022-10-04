@@ -1,0 +1,58 @@
+4|Oct|2022
+12:35 am
+
+Concept : Z function for strings
+
+So, today I have learn Zfunction algorithm which was a little bit confusing at the start but I have figured it out some how. But still there is a segment
+Which Iam unable to understand. I am unable to understand why there are taking 'k' value.
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+void constructZarray(string s){
+    int n=s.length();
+    int l,r=0;
+    int k;
+    int z[n];
+    z[0]=0;
+    for(int i=1;i<n;i++){
+        if(i>r){
+            l=r=i;
+            while(r<n && s[r-l]==s[r]){
+                r++;
+            }
+            z[i]=r-l;
+            r--;
+        }
+        else{
+            k=i-l;
+            if(z[k]<r-i+1){
+                z[i]=z[k];
+            }
+            else{
+                l=i;
+                while(r<n && s[r-l]==s[r]){
+                    r++;
+                }
+                z[i]=r-l;
+                r--;
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        cout<<z[i]<<" ";
+    }
+}
+int main()
+{
+    string s="aaabaab";
+    constructZarray(s);
+    
+}
+
+Output : 0 2 1 0 2 1 0
+
+Applications include : 
+1) Search the substring
+2) Number of distinct substrings
+3) String compression
