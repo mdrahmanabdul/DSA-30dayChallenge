@@ -109,5 +109,45 @@ int main(){
     string pattern = "blue";
     search(pattern,text);
 }
-Time complexity and space complexity : O(m+n)
-                                        where m is length of pattern and n is length of main string(text).
+Time complexity and space complexity : O(m+n) where m is length of pattern and n is length of main string(text).
+
+6:03 pm
+sameday
+
+Learnt about Eulers Totient function which is used to calculate Φ(number) phi value of a number. Here phy values means that no.coprimes of that number.
+For example, let us consider 6. For six 2,3 4 are having more than 1 same factors so, we don't consider them as coprimes. But 5 and 1 are having no 
+same factors other than 1. So Φ(6) = 2. I came to know that this function is used in cryptograpghy but I don't know how exactly. But the good thing 
+is through this I have learnt how to calculate the gcd of two numbers.
+
+Here is the algorithm for Eulers Totient Function : 
+
+#include<iostream>
+using namespace std;
+int gcd(int number,int b){
+    if(number==0){
+        return b;
+    }
+    return gcd(b%number,number);
+}
+int phi(unsigned int number){
+    unsigned int count=1;
+    for(int i=2;i<number;i++){
+        if(gcd(number,i)==1){
+            count++;
+        }
+    }
+    return count;
+}
+int main()
+{
+    int n = 6;
+    cout<<"phi("<<n<<") = "<<phi(n);
+}
+
+Output : Phi(6) = 2
+
+The above code calls gcd function O(n) times. The time complexity of the gcd function is O(h) where “h” is the number of digits in a smaller number 
+of given two numbers. Therefore, an upper bound on the time complexity of the above solution is O(N log N) [HowΦ there can be at most Log10n digits 
+in all numbers from 1 to n]
+
+Auxiliary Space: O(log N)
