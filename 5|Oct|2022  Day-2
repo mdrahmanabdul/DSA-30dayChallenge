@@ -1,0 +1,44 @@
+5|Oct|2022
+12:41pm
+  Twist : I have learnt how to create a basic flutter application and also learnt how to run that application in my phone(Andriod). I have learnt about 
+  Scaffold tag with which we can insert images, text and how to center the components.
+  I have also learnt how to insert images from the assests folder by altering pubspec.yaml file. I have also learnt how to change the app icon by replacing
+  default app icon.
+  Resources : appicon generator
+              icons8
+  
+11:34pm
+So today in the evening I was able to solve codechef 3 problems. Today I haven't touched system design and Fraz codesheet because today I felt little bit depressed. But 
+right from tomorrow I will be cracking problems daily 2.
+
+Now in the night I have learnt string hashing. So, this algorithm is used to find whether the strings are equal or not in O(1) time after obtaining their hash values.
+To find the duplicate strings the naive algorithm will take O(nmlongn) time but using hashing it takes O(nm+logn) only.
+
+#include<bits/stdc++.h>
+using namespace std;
+long long compute_hashValue(string s){
+    int p=31; // for small letter we use 31, if capitals are also there then we should use 53
+    long long m=1e9+9; //m should be larger to decrease the probabilty of colliding hash values
+                        //a good choice for m is some larger prime number.
+    int hash_value=0;
+    long long p_pow=1;
+    //in the formula (c-'a'+1) => +1 is added because if a==0 then a,aa,aaa,aaa,aa.... will give the same values.
+    for(char c : s){
+        hash_value = (hash_value+(c-'a'+1)*p_pow)%m;
+        p_pow=(p_pow*p)%m;
+    }
+    return hash_value;
+}
+int main()
+{
+    string s;
+    cin>>s;
+    cout<<compute_hashValue(s);
+}
+
+Applications of Hashing
+Here are some typical applications of Hashing:
+
+Rabin-Karp algorithm for pattern matching in a string in O(n) time
+Calculating the number of different substrings of a string in O(n^2logn) (see below)
+Calculating the number of palindromic substrings in a string.
