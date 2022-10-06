@@ -1,0 +1,125 @@
+6|Oct|2022
+6:31pm
+
+Today I have learnt about famous kadane's Algorithm with which we can calculate the maximum subarray sum very easily. This algorithm is very efficient when 
+compared to other algorithms in the market. It calculates the the largest contiguous subarray sum in just O(N) time with space O(1) only. So, I felt I should
+learn this.
+
+Kadane's Algorithm :
+#include<iostream>
+#include<climits>
+using namespace std;
+int maximum_subArray_sum(int arr[],int n){
+    int maxSum=INT_MIN;
+    for(int i=0;i<n;i++){
+        int current_sum=0;
+        for(int j=i;j<n;j++){
+            current_sum+=arr[j];
+            if(current_sum>maxSum){
+                maxSum=current_sum;
+            }
+        }
+    }
+    return maxSum;
+}
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<maximum_subArray_sum(arr,n);
+}
+
+8:39pm
+YouTube video : https://www.youtube.com/watch?v=xZykmhcWGuY
+Watched apni kaksha video on recursion and and solved 5 advanced problems which were asked in adobe and amazon. Although I watched the whole video I am 
+unable to figure out the exact way to apply them when a new question comes. I will practice more and master the recursion.
+
+Question 1 :
+// In a party you can call guests in singles and pairs. Compute how many ways we can call them
+#include<iostream>
+using namespace std;
+int ways_to_callGuests(int n){
+    if(n<=1){
+        return 1;
+    }
+    int way1 = ways_to_callGuests(n-1);
+    int way2 =(n-1)*ways_to_callGuests(n-2);
+    return way1+way2;
+}
+int main()
+{
+    int n=4;
+    cout<<ways_to_callGuests(n);
+}
+
+Question 2 :
+Ways to place tiles in a room of nxm size
+
+#include<iostream>
+using namespace std;
+int countWays_ToPlaceTiles(int n,int m){
+    if(n==m){
+        return 2;
+    }
+    if(n<m){
+        return 1;
+    }
+    int verticalPlacements = countWays_ToPlaceTiles(n-m,m);
+    int horizontalPlacements = countWays_ToPlaceTiles(n-1,m);
+    
+    return verticalPlacements+horizontalPlacements;
+}
+int main()
+{
+    int n=5,m=4;
+    cout<<countWays_ToPlaceTiles(n,m);
+    
+}
+
+Question 3 : 
+
+Number of ways how can we reach the destination(n,m). Basically it is rat in maze problem.
+#include<bits/stdc++.h>
+using namespace std;
+int countPaths(int i,int j,int n,int m){
+    if(i==n || j==m){
+        return 0;
+    }
+    if(i==n-1 && j==m-1){
+        return 1;
+    }
+    int downWardPaths = countPaths(i+1,j,n,m);
+    int upWardPahts = countPaths(i,j+1,n,m);
+    return downWardPaths+upWardPahts;
+}
+int main()
+{
+    int n=3,m=3;
+    cout<<countPaths(0,0,n,m);
+}
+
+
+Question 4 :
+
+Print all the substrings
+#include<bits/stdc++.h>
+using namespace std;
+void printPerm(string a,int l,int r,int count){
+    if(l==r){
+        cout<<a<<" "<<count<<endl;
+    }
+    for(int i=l;i<=r;i++){
+        swap(a[l],a[i]);
+        printPerm(a,l+1,r,count+1);
+        swap(a[l],a[i]);
+    }
+}
+int main(){
+    string str="rahman";
+    int r=str.length();
+    printPerm(str,0,r-1,0);
+}
+
