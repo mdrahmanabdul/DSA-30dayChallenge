@@ -105,3 +105,42 @@ int main(){
     cout<<isPalindrome(s);
 }
 
+
+Q : Find the answer of x raise to the power n where the n can be both positive and negative as well in the integer range.
+
+Code :
+#include<bits/stdc++.h>
+using namespace std;
+double findingPowerEfficiently(int base,int exponent){
+    long long n=exponent;
+    double result = 1.0;
+    if(n<0) n*=-1;
+    while(n>0){
+        if(n%2==1){
+            result*=base;
+            n-=1;
+        }
+        else{
+            base*=base;
+            n/=2;
+        }
+        
+    }
+    if(result<0) (double)1.0/(double)result;
+    return result;
+}
+int main(){
+    int base,exponent;
+    cin>>base>>exponent;
+    cout<<findingPowerEfficiently(base,exponent);
+}
+
+Explaination : https://www.youtube.com/watch?v=l0YC3876qxg
+Previously to find the power of a number in the naive approach we are looping through n number of times so, the time complexity is obviouslt
+O(n). But we can reduce the time complexity by O(log n) as we see in the above code we are diving the exponent by 2.
+for calculating 2^10,
+Previously we were doing => 2*2*2*2*2....(n)
+but in the latest approach (4*4)*(4*4)
+                            (16)*(16)
+                             (32)*(1)
+                             So like this we have minimized the amount of time required substancially.
