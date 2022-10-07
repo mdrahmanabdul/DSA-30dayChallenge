@@ -67,5 +67,41 @@ int main()
 }
 
 
+Problem 3:
+Q:Check if a string is a palindrome or not when all the characters are lower case alphabets.
 
+Code:
+#include<bits/stdc++.h>
+using namespace std;
+bool check(int l,int r,string &s){
+    
+    if(l==r){
+        //if there is only one character in the string
+        return true;
+    }
+    if(s[l]!=s[r]){
+        //if first and last character are not same
+        return false;
+    }
+    if(l>=r){
+        //both hals are same and there is symmetry
+        return true;
+    }
+    if(s[l]==s[r]){
+        //if first and last are same then check for remaining characters
+       return check(l+1,r-1,s);
+    }
+    return false;
+}
+bool isPalindrome(string s){
+    bool res=true;
+    int l=0,r=s.size()-1;
+    res=check(l,r,s);
+    return res;
+}
+int main(){
+    string s;
+    cin>>s;
+    cout<<isPalindrome(s);
+}
 
