@@ -1,0 +1,71 @@
+7|Oct|2022
+4:05pm
+
+Today I felt that I am lacking in recursion so I started to deep dive in recursion. I actually went through some basic problems like calculating power of a
+number which is raised to the power n, Checking if a string is palindrome or not,etc. Got to know about two inbuilt functions tolower and isalphanum.
+
+Observations : 
+
+1) Never go deep into how the recursion is working. You will get confused.
+2) Apply logic for the first case and ask recursion to do the remaining.
+3) Recursion makes code so simple and also more readable.
+4) There are cases where recursion is best and also where the recursion is worst.
+5) Focus on the sub problem first, The larger problem itself gets solved.
+
+
+Problem 1 : 
+Q : Calculate the value of x^n using recursion.
+
+Code : 
+#include<iostream>
+using namespace std;
+int answer(int base,int exp){
+    if(exp==0){
+        return 1;
+    }
+    if(base==0){
+        return 0;
+    }
+    return base*answer(base,exp-1);
+}
+int main(){
+    int base,exp;
+    cin>>base>>exp;
+    cout<<answer(base,exp);
+}
+
+Explaination : As I said in the formula we are just multiplying the first number with a function which returns the value for us until exp is not zero.
+Let us suppose base=3 and exp=5, the answer we get is 243. So this is how the recursion runs in the background.
+Diagram : refer the images(Recursion-1.0).
+
+
+Problem 2: 
+Q : A String is given where the string is combination of alphanumeric and non-alphanumeric as well. You have to ignore all the non-alphanumeric, consider
+all upper case letters also as lower case and then check whether the string is a palindrome or not.
+
+Code :
+#include<iostream>
+using namespace std;
+ bool isPalindrome(string s) {
+    int i = 0, j = s.size() - 1;
+        while(i < j){
+            while(i < j && !isalnum(s[i])) i++;
+            while(i < j && !isalnum(s[j])) j--;
+            if(tolower(s[i++]) != tolower(s[j--])) return false;
+        }
+        return true; 
+    }
+int main()
+{
+    string s="A man, a plan, a canal: Panama";
+    if(isPalindrome(s)){
+        cout<<"is a palindrome"<<endl;
+    }else{
+        cout<<"No"<<endl;
+    }
+    
+}
+
+
+
+
