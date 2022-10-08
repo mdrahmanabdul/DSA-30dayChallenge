@@ -1,0 +1,56 @@
+8|Oct|2022
+2:54pm
+
+Today woke up at 9am and started reading System Design. Today I have learnt about designing YouTube which is video streaming platform. In that I have 
+learnt about video uploading. After that I have seen Recursion questions. 
+
+Today I partially learnt how the subsets of the array can be taken. I came to know how to solve that using recursion and backtracking. Backtracking and 
+recursion are time taking process to learn but I am sure that I will be able to master that one day for sure. 
+
+Q : Given an array of n unique element, generate all the subsets of that array.
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+void sub(vector<int> &v,vector<vector<int>>& result,int index,vector<int> &temp){
+    result.push_back(temp);
+    for(int i=index;i<v.size();i++){
+        temp.push_back(v[i]);
+        sub(v,result,i+1,temp);
+        temp.pop_back();
+    }
+    return;
+}
+vector<vector<int>> printSubsets(vector<int> &v){
+    int index=0;
+    vector<int> temp;   
+    vector<vector<int>> result;
+    sub(v,result,index,temp);
+    return result;
+    
+}
+int main(){
+    int n;
+    cin>>n;
+    vector<int> v;
+    int a;
+    for(int i=0;i<n;i++){
+        cin>>a;
+        v.push_back(a);
+    }
+    
+   vector<vector<int>>result = printSubsets(v);
+   for(int i=0;i<result.size();i++){
+       for(int j=0;j<result[i].size();j++){
+           cout<<result[i][j]<<" ";
+       }
+       cout<<endl;
+   }
+}
+
+Observations : 
+1) There can be 2^n possibilities of subsets in an array where n is number of elements.
+
+Explanation : 
+First we are considering the element which we are including and then we are not considering the element. This is the way this problem can be solved in 
+O(n. 2^n) time and O(n) because there can be at max n recursion calls at a particular time, which would consume O(n) stack space. 
