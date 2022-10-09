@@ -1,0 +1,63 @@
+9|Oct|2022
+5:33 PM
+
+So, today I came across a problem called permutations of an array in which we use recursion and backtracking to solve that problem like we did earlier to 
+solve subsets of an array problem. Here we are using a simple logic.
+ 
+Procedure : 
+
+Suppose we took a vector of three elements namely 1,2,3
+So there will be 6 possibilities. How ?
+1) So, we fix the element in the first index where there are three possibilies to select the number. We can either choose 1,2 or 3.
+2) For the next index there are two elements remaining. So we can that we are having only two possibilities.
+3) While coming to the last element we are having single element and single index remaining with us so, we can place that in single way.
+4) If we multiply all the possibilities we get the answer. 3*2*1 = 6 possibilities.
+
+Actually I am not getting how to solve this problem so, I have copied this code from Coding Ninjas.
+
+#include<bits/stdc++.h>
+using namespace std;
+void swap(int &left,int &right){
+    int temp = left;
+    left = right;
+    right = temp;
+}
+void helper(vector<int> nums,vector<vector<int>> &result,int left,int right){
+    if(left==right){
+        result.push_back(nums);
+        return;
+    }
+    for(int i=left;i<=right;i++){
+        swap(nums[left],nums[i]);
+        helper(nums,result,left+1,right);
+        swap(nums[left],nums[i]);
+    }
+}
+vector<vector<int>> permute(vector<int> v){
+    vector<vector<int>> result;
+    int left=0,right=v.size()-1;
+    helper(v,result,left,right);
+    return result;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int> v;
+    int x;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        v.push_back(x);
+    }
+    vector<vector<int>> result = permute(v);
+    cout<<"So, there are "<<result.size()<<" possibilities : "<<endl;
+    for(int i=0;i<result.size();i++){
+        for(int j=0;j<result[i].size();j++){
+            cout<<result[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+Time Complexity : O(N*N!)
+Space Complexity : O(N)
