@@ -1,0 +1,106 @@
+11|Oct|2022
+3:32pm
+So, yesterday the new TV has arrived and I haven't practiced even a little bit. 
+Now, today I solved two problems permutations(ii) and subsets(ii) which are slightly modified version of previous premutations and subsets problems. In these
+problems the modification was that duplicate elements are also included and we have to handle them too. So, the technique is really simple in permutations
+
+Q : Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+
+Example 1:
+
+Input: nums = [1,1,2]
+Output:
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+ 
+ 
+Code :
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>> generatePermutations(vector<int> nums){
+    vector<int> og=nums;
+    vector<vector<int>> result={nums};
+    next_permutation(nums.begin(),nums.end());
+    while(nums!=og){
+        result.push_back(nums);
+        next_permutation(nums.begin(),nums.end());
+    }
+    return result;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int x;
+    vector<int> nums;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        nums.push_back(x);
+    }
+    vector<vector<int>> result = generatePermutations(nums);
+    for(int i=0;i<result.size();i++){
+        for(int j=0;j<result[i].size();j++){
+            cout<<result[i][j]<<" ";
+        }cout<<endl;
+    }
+}
+
+
+Explanation : Here we are copying the nums vector into new vector called og. And we are adding the given vector into the ans vector. Then we are using next 
+permutation function to generate the possible permutations of other than og which we saved earlier. So, like this we generate all permutations of given nums.
+
+Q : Given an integer array nums that may contain duplicates, return all possible subsets (the power set). The solution set must not contain duplicate 
+subsets. Return the solution in any order.
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+void helper(int index,vector<vector<int>> &result,vector<int> &curr_subset,vector<int> &nums){
+    if(index==nums.size()){
+        result.push_back(curr_subset);
+        return;
+    }
+    curr_subset.push_back(nums[index]);
+    helper(index+1,result,curr_subset,nums);
+    curr_subset.pop_back();
+    while(index+1 < nums.size() && nums[index]==nums[index+1])
+        index++;
+    helper(index+1,result,curr_subset,nums);
+    
+}
+vector<vector<int>> subset_generator(vector<int> nums){
+    vector<vector<int>> result;
+    vector<int> curr_subset;
+    sort(nums.begin(),nums.end());
+    helper(0,result,curr_subset,nums);
+    return result;
+}
+int main(){
+    int n;
+    cin>>n;
+    int x;
+    vector<int> nums;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        nums.push_back(x);
+    }
+    vector<vector<int>> result = subset_generator(nums);
+    sort(result.begin(),result.end());
+    for(int i=0;i<result.size();i++){
+        for(int j=0;j<result[i].size();j++){
+            cout<<result[i][j]<<" ";
+        }cout<<endl;
+    }
+    cout<<"result size : "<<result.size()<<endl;
+}
+
+Explanation : 
+
+As we know how the backtracking approach works. We first insert a character in the subset and then we handle the task to recursion for the other entries.
+If we reached an end limit and now if the path has reached the dead end then we explore other solutions by popping back. So this way we solve the problem.
+But as given in the question to deal with duplicates we run a while loop to skip the indices with duplicate values.
+
+
+
+given
