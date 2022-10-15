@@ -1,0 +1,54 @@
+15|Oct|2022
+5:36pm
+
+Today I learnt more about how the recursion calls are running in backtracking.
+Watched the videos of striver(Combination sum(i) & Combination sum(ii)).
+
+https://www.youtube.com/watch?v=G1fRTGRxXU8 - CombinationSum2
+https://www.youtube.com/watch?v=OyZFFqQtu98 - CombinationSum1
+
+#include<bits/stdc++.h>
+using namespace std;
+void helper(int index,int target,vector<int> &tempDS,vector<int> &nums,vector<vector<int>> &result){
+    if(index==nums.size()){
+        if(target==0){
+            result.push_back(tempDS);
+        }return;
+    }
+    
+    if(nums[index]<=target){
+        tempDS.push_back(nums[index]);
+        helper(index,target-nums[index],tempDS,nums,result);
+        tempDS.pop_back();
+    }
+    helper(index+1,target,tempDS,nums,result);
+}
+vector<vector<int>> findAnswer(vector<int> nums,int target){
+    vector<vector<int>> result;
+    vector<int> tempDS;
+    helper(0,target,tempDS,nums,result);
+    return result;
+}
+int main(){
+    int n;
+    cout<<"Enter the no of elements in the vector : ";
+    cin>>n;
+    vector<int> nums;
+    int x;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        nums.push_back(x);
+    }
+    int target;
+    cout<<"Enter the target : "<<endl;
+    cin>>target;
+    vector<vector<int>> result = findAnswer(nums,target);
+    cout<<"The combinations are : "<<endl;
+    for(int i=0;i<result.size();i++){
+        for(int j=0;j<result[i].size();j++){
+            cout<<result[i][j]<<" ";
+        }cout<<endl;
+    }
+    cout<<"Thank you !!"<<endl;
+}
+
