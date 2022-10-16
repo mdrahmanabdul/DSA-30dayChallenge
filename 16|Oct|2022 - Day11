@@ -44,3 +44,5 @@ int main(){
         cout<<result[i]<<" ";
     }
 }
+TC : O(3^N)
+SC : O(N)
