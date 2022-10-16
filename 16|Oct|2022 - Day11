@@ -1,0 +1,46 @@
+16|Oct|2022
+6:45am
+So, Today I have learnt how to make the phone number combinations.
+In the question we will be given a keypad and we are given numbers string then we have to make all the combinations and return them the combinations.
+
+Question : LeetCode(17) : https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
+Code :
+#include<bits/stdc++.h>
+using namespace std;
+unordered_map<int,string> mapp;
+string currentString;
+vector<string> ans;
+void helper(int index,string digits){
+    if(digits.length()==currentString.length()){
+        ans.push_back(currentString);
+        return;
+    }
+    string charss = mapp[digits[index]-48];
+    for(char c:charss){
+        currentString.push_back(c);
+        helper(index+1,digits);
+        currentString.pop_back();
+    }
+}
+vector<string> findAnswer(string digits){
+    mapp[2]="abc";
+    mapp[3]="def";
+    mapp[4]="ghi";
+    mapp[5]="jkl";
+    mapp[6]="mno";
+    mapp[7]="pqrs";
+    mapp[8]="tuv";
+    mapp[9]="wxyz";
+    helper(0,digits);
+    return ans;
+    
+}
+int main(){
+    string digits;
+    cin>>digits;
+    vector<string> result=findAnswer(digits);
+    for(int i=0;i<result.size();i++){
+        cout<<result[i]<<" ";
+    }
+}
