@@ -1,0 +1,60 @@
+19|Oct|2022
+1:26pm
+
+Today I came across another backtracking problem where I have to change the numbers which are in fore directions of the given number.
+Leetcode 733 : https://leetcode.com/problems/flood-fill/description/
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+void changeTheColor(vector<vector<int>> &image,int row,int col,int reqColor,int currentColor){
+    if(image[row][col]==currentColor){
+        image[row][col]=reqColor;
+    }
+    if(row>=1) changeTheColor(image,row-1,col,reqColor,currentColor);
+    if(col>=1) changeTheColor(image,row,col-1,reqColor,currentColor);
+    if(row+1<image.size()) changeTheColor(image,row+1,col,reqColor,currentColor);
+    if(col+1<image[0].size()) changeTheColor(image,row,col+1,reqColor,currentColor);
+    
+}
+vector<vector<int>> alterTheImage(vector<vector<int>> &image,int row,int col,int reqColor){
+    int currentColor = image[row][col];
+    if(currentColor!=reqColor){
+        changeTheColor(image,row,col,reqColor,currentColor);
+    }
+    return image;
+}
+int main(){
+    vector<vector<int>> image;
+    cout<<"Enter m and n : "<<endl;
+    int m,n;
+    cin>>m>>n;
+    int x;
+    for(int i=0;i<m;i++){
+        vector<int> temp;
+        for(int j=0;j<n;j++){
+            cin>>x;
+            temp.push_back(x);
+        }
+        image.push_back(temp);
+    }
+    cout<<"Enter the required color : ";
+    int reqColor; cin>>reqColor;
+    int sr,sc; 
+    cout<<"Enter sr and sc : "<<endl;
+    cin>>sr>>sc;
+    cout<<"Before alteration : "<<endl;
+    for(int i=0;i<image.size();i++){
+        for(int j=0;j<image[0].size();j++){
+            cout<<image[i][j]<<" ";
+        }cout<<endl;
+    }
+    cout<<endl;
+    alterTheImage(image,sr,sc,reqColor);
+    cout<<"after alteration"<<endl;
+    for(int i=0;i<image.size();i++){
+        for(int j=0;j<image[0].size();j++){
+            cout<<image[i][j]<<" ";
+        }cout<<endl;
+    }
+}
