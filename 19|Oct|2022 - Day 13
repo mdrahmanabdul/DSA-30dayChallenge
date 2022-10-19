@@ -7,23 +7,23 @@ Leetcode 733 : https://leetcode.com/problems/flood-fill/description/
 Code : 
 #include<bits/stdc++.h>
 using namespace std;
-void changeTheColor(vector<vector<int>> &image,int row,int col,int reqColor,int currentColor){
-    if(image[row][col]==currentColor){
-        image[row][col]=reqColor;
+void dfs(vector<vector<int>> &image,int row,int col,int newColor,int presentColor){
+    if(image[row][col]==presentColor){
+        image[row][col]=newColor;
+            if(row>=1) dfs(image,row-1,col,newColor,presentColor);
+            if(col>=1) dfs(image,row,col-1,newColor,presentColor);
+            if(row+1<image.size()) dfs(image,row+1,col,newColor,presentColor);
+            if(col+1<image[0].size()) dfs(image,row,col+1,newColor,presentColor);
+            
     }
-    if(row>=1) changeTheColor(image,row-1,col,reqColor,currentColor);
-    if(col>=1) changeTheColor(image,row,col-1,reqColor,currentColor);
-    if(row+1<image.size()) changeTheColor(image,row+1,col,reqColor,currentColor);
-    if(col+1<image[0].size()) changeTheColor(image,row,col+1,reqColor,currentColor);
-    
 }
-vector<vector<int>> alterTheImage(vector<vector<int>> &image,int row,int col,int reqColor){
-    int currentColor = image[row][col];
-    if(currentColor!=reqColor){
-        changeTheColor(image,row,col,reqColor,currentColor);
-    }
-    return image;
-}
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int presentColor = image[sr][sc];
+        if(presentColor!=color){
+            dfs(image,sr,sc,color,presentColor);
+        }
+        return image;
+ }
 int main(){
     vector<vector<int>> image;
     cout<<"Enter m and n : "<<endl;
@@ -50,7 +50,7 @@ int main(){
         }cout<<endl;
     }
     cout<<endl;
-    alterTheImage(image,sr,sc,reqColor);
+    floodFill(image,sr,sc,reqColor);
     cout<<"after alteration"<<endl;
     for(int i=0;i<image.size();i++){
         for(int j=0;j<image[0].size();j++){
