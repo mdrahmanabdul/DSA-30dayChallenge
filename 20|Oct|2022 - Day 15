@@ -1,6 +1,76 @@
 Todays agenda : 
 
 1. Revise all the recursion codes and dry run them - 
-2. Complete 3 backtracking questions - 
+2. Complete all hashmap stl
 3. Check out Angular course in Udemy and prepare a schedule for that - 
 4. See videos regarding backtracking in Youtube - 
+
+Leetcode : 952
+link : https://leetcode.com/problems/verifying-an-alien-dictionary/description/
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+bool check(string s1,string s2,map<char,int> map){
+    if(s1==s2){
+        //if both the strings are equal then the order doesn't matter which comes first or next.
+       //hence we return true.
+        return true;
+    }
+    int found = s1.find(s2);
+    if(found!=string::npos){
+        //to check if the string is present in the string s1 or not
+        return false;
+    }
+    for(int i=0;i<s1.length() && i<s2.length();i++){
+        
+        if(map[s1[i]]>map[s2[i]]){
+            //if the letter in the second string is having more value than the value of first string
+            //then we can directly return false.
+            return false;
+        }
+    }
+    return true;
+}
+bool alienSorted(vector<string> &words,string order){
+    map<char,int> map;
+    int count=1;
+    for(int i=0;i<order.size();i++){
+        map[order[i]]=count;
+        count++;
+    }
+    for(int i=0;i<words.size()-1;i++){
+        
+        if(map[words[i][0]]>map[words[i+1][0]]){
+        //checking the count of first character of both the i and (i+1)th word according to the order provided
+        // for example a=1,b=2,c=3.....z=26 if order = abcdef....z
+            return false;
+        }else if(map[words[i][0]]==map[words[i+1][0]]){
+            cout<<"goooddd";
+            cout<<map[words[i][0]]<<" "<<map[words[i+1][0]]<<endl;
+            if(!check(words[i],words[i+1],map)){
+                return false;
+            }
+            
+        }
+    }return true;
+}
+int main(){
+    int n;
+    cout<<"Enter the number of words : "<<endl;
+    cin>>n;
+    vector<string> words;
+    for(int i=0;i<n;i++){
+        string s;
+        cin>>s;
+        words.push_back(s);
+    }
+    cout<<"Enter the order : "<<endl;
+    string order;
+    cin>>order;
+    if(alienSorted(words,order)){
+        cout<<"true";
+    }else{
+        cout<<"false";
+    }
+}
