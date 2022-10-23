@@ -1,0 +1,39 @@
+23|Oct|2022
+11:39 am
+
+So, as there are no backtracking problems in leetcode cheat sheet I am going to solve the two pointer problems which are also as important as other topics.
+So, I have solved a partition of string problem now which is based two pointer.
+
+Leetcode 763 : https://leetcode.com/problems/partition-labels/description/
+Code : 
+
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+using namespace std;
+vector<int> partitionLabels(string s){
+    unordered_map<char,int> map;
+    for(int i=0;i<s.size();i++){
+        char ch = s[i];
+        map[ch]=i;
+    }
+    vector<int> ans;
+    int range=0;
+    int previousCharRange = -1;
+    for(int i=0;i<s.size();i++){
+        range=max(range,map[s[i]]);
+        if(range==i){
+            ans.push_back(range-previousCharRange);
+            previousCharRange=range;
+        }
+    }
+    return ans;
+}
+int main(){
+    string s;
+    cin>>s;
+    vector<int> ans = partitionLabels(s);
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i]<<" ";
+    }
+}
