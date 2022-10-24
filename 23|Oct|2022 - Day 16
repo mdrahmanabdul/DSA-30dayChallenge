@@ -37,3 +37,44 @@ int main(){
         cout<<ans[i]<<" ";
     }
 }
+
+Topic : Sliding Window 
+Description : 
+For calculating maximum sub array sum we in naive method/Brute force use two loops.t can be observed from the above code that the time complexity 
+is O(k*n) as it contains two nested loops.
+
+So, we can use sliding window to minimize the time complexity from O(N*k) - > O(N).
+#include <bits/stdc++.h>
+using namespace std;
+int maxSum(int arr[], int n, int k)
+{
+
+	int max_sum = INT_MIN;
+	for (int i = 0; i < n - k + 1; i++) {
+		int current_sum = 0;
+		for (int j = 0; j < k; j++)
+			current_sum = current_sum + arr[i + j];
+            max_sum = max(current_sum, max_sum);
+	}
+
+	return max_sum;
+}
+int main()
+{
+	int n;
+	cout<<"Enter the no.of elements : "<<endl;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++){
+	    cin>>arr[i];
+	}
+	
+	int k;
+	cout<<"Enter the window size : "<<endl;
+	cin>>k;
+	
+
+	cout <<"The Max sum is : "<<maxSum(arr, n, k);
+	return 0;
+}
+
