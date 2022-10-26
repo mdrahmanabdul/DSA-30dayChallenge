@@ -40,3 +40,38 @@ int main(){
     cin>>k;
     cout<<answer(nums,k)-answer(nums,k-1);
 }
+
+Leetcode : 763 : https://leetcode.com/problems/partition-labels/
+
+Code : 
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+vector<int> partitionLabels(string s){
+    unordered_map<int,int> map;
+    vector<int> ans;
+    for(int i=0;i<s.size();i++){
+        char ch=s[i];
+        map[ch]=i;
+    }
+    int range_of_current=0,range_of_nxt=-1;
+    int largestRange=0;
+    for(int i=0;i<s.size();i++){
+        largestRange = max(range_of_current,map[s[i]]);
+        range_of_current=largestRange;
+        if(largestRange==i){
+            ans.push_back(largestRange-range_of_nxt);
+            range_of_nxt=range_of_current;
+        }
+    }
+    return ans;
+}
+int main(){
+    string s;
+    cin>>s;
+    vector<int> ans = partitionLabels(s);
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i]<<" ";
+    }
+}
