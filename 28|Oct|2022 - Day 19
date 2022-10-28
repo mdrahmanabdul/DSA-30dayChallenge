@@ -1,0 +1,54 @@
+28|Oct|2022
+10:14 am
+
+As today is the last day of stacks I am practicing some standard stack problems which are not present in the list.
+
+1) Queue using two Stacks
+
+Code : 
+#include<bits/stdc++.h>
+using namespace std;
+struct Queue{
+    stack<int> s1,s2;
+    void enQueue(int data){
+        while(!s1.empty()){
+            s2.push(s1.top());
+            s1.pop();
+        }
+        s1.push(data);
+        while(!s2.empty()){
+            s1.push(s2.top());
+            s2.pop();
+        }
+    }
+    
+    int deQueue(){
+        if(s1.empty()){
+           cout<<"queue is empty"<<endl;
+           exit(0);
+        } 
+        int x = s1.top();
+        s1.pop();
+        return x;
+    }
+    
+    int Front(){
+        if(s1.empty()){
+            cout<<"Empty Queue"<<endl;
+            exit(0);
+        }
+        return s1.top();
+    }
+};
+int main(){
+    Queue q;
+    q.enQueue(1);
+    q.enQueue(2);
+    q.enQueue(3);
+    q.enQueue(4);
+    q.enQueue(5);
+    q.enQueue(6);
+    cout<<q.deQueue()<<endl;
+    cout<<q.deQueue()<<endl;
+    cout<<"front "<<q.Front();
+}
