@@ -112,3 +112,34 @@ int main(){
     cout<<"front : ";
     st.front();
 }
+
+
+9:11 pm
+
+Learnt Javascript let and const keywords.
+Learnt about classes, properties and methods.
+
+class Human{
+  constructor(){
+    this.hands=2;
+    this.legs=2;
+  }
+}
+class Person extends Human{
+  constructor(){
+    super();
+    this.age=21;
+    this.name='Rahman';
+    this.legs=4;
+  }
+  printLegs(){
+    console.log(this.legs)
+  }
+}
+
+const p=new Person();
+p.printLegs();
+
+
+
+
