@@ -7,3 +7,36 @@ Morning I refreshed some concepts in javaScipt
 2 - Array functions
 3 - Destructing
 4 - Primitive and Reference Types
+
+Coding Questions : 
+1) Online Stock Span - Leetcode - 901 - https://leetcode.com/problems/online-stock-span/description/
+
+Code : O(n^2) : 
+
+// O(n^2) solution 
+#include<iostream>
+#include<vector>
+using namespace std;
+vector<int> solve(vector<int> &nums){
+    int n=nums.size();
+    vector<int> ans(n,1);
+    for(int right=1;right<n;right++){
+        if(nums[right]>nums[right-1]){
+            int count=0,left=right-1;
+            while(nums[left]<nums[right]){
+                count++;
+                left--;
+            }
+            ans[right]+=count;
+        }
+    }
+    return ans;
+}
+int main(){
+ vector<int> nums={100,80,60,70,60,75,85};
+ vector<int> ans=solve(nums);
+ for(int i=0;i<ans.size();i++){
+     cout<<ans[i]<<" ";
+ }
+}
+
