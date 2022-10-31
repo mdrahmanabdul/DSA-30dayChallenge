@@ -1,0 +1,21 @@
+31|Oct|2022 - 10:16pm
+What I did today ?
+
+- Learnt how to create and run React app (8:00 am)
+    - What are components in React?
+    - React files overview
+    - JSX in detail
+- Tried solving Stack last 3 problems(stock span, min cost tree,etc) but they are using dynamic programming so I left them as I don't know DP. (9:00am)
+- AWS basic introduction is completed (3:00pm)
+    - What is cloud computing
+    - What are cloud computing types(Public, Private, Hybrid) (6:00pm)
+    - Lambda Function intro and fun app (10:00pm)
+    
+Things to learn tomorrow...
+ - S3 buckets in AWS
+ - React 
+    1. How to create custom components and how to organize them
+    2. How to add jsx to the component
+    3. How to style the component using css
+ - Linked lists in DSA
+ 
