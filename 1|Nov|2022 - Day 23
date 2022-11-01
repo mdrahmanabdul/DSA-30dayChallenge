@@ -9,6 +9,16 @@ DSA
 - Linked List started
 - Implement Linked list from sratch
 
+AWS 
+    - IAM(Identity and Access Management) - Create Users, Giving policies, structure, 
+    - 2 Mechanisms to prevent compromising with security
+        1. IAM Password Policy
+        2. Multi Factor Authentication(MFA) - Devices
+    - 3 Ways to access AWS console
+        1.AWS management console (protected by password + MFA)
+        2.AWS CLI (protected by Access keys)
+        3.AWS SDK (protected by Access keys)
+
 Code : Implementing basic LinkedList with all operations(insert,delete,traverse)
 
 //insert delete traverse sort merge 
