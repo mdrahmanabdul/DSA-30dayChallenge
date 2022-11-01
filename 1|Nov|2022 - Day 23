@@ -8,3 +8,71 @@
 DSA 
 - Linked List started
 - Implement Linked list from sratch
+
+Code : Implementing basic LinkedList with all operations(insert,delete,traverse)
+
+//insert delete traverse sort merge 
+#include<iostream>
+using namespace std;
+class Node{
+    public :
+    int data;
+    Node *next;
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+Node* takeInput(){
+    int data;
+    cin>>data;
+    Node *head=NULL;
+    Node *tail=NULL;
+    while(data!=-1){
+        Node *newNode=new Node(data);
+        if(head==NULL){
+            head=newNode;
+            tail=newNode;
+        }else{
+            tail->next=newNode;
+            tail=newNode;
+        }
+        cin>>data;
+    }
+    return head;
+}
+void headDeletion(Node *head){
+    Node *tobedeleted=head;
+    head=head->next;
+    delete tobedeleted;
+}
+void deleteNode(Node *head,int value){
+    if(head==NULL){
+        return;
+    }
+    if(head->next==NULL){
+        headDeletion(head);
+    }
+    
+    Node *temp=head;
+    while(temp->next->data!=value){
+        temp=temp->next;
+    }
+    Node *tobedeleted=temp->next;
+    temp->next=temp->next->next;
+    delete tobedeleted;
+}
+void display(Node *head){
+    while(head!=NULL){
+        cout<<head->data<<" ";
+        head=head->next;
+    }
+}
+int main(){
+    cout<<"Enter the elements : "<<endl;
+    Node *head=takeInput();
+    cout<<"Enter the value you want to delete : "<<endl;
+    int value;cin>>value;
+    deleteNode(head,value);
+    display(head);
+}
